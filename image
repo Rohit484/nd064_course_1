@@ -1,0 +1,45 @@
+# build an image
+# OPTIONS - optional;  define extra configuration
+# PATH - required;  sets the location of the Dockefile and  any referenced files 
+docker build [OPTIONS] PATH
+
+# Where OPTIONS can be:
+-t, --tag - set the name and tag of the image
+-f, --file - set the name of the Dockerfile
+--build-arg - set build-time variables
+
+# Find all valid options for this command 
+docker build --help
+
+
+# build an image using the Dockerfile from the current directory
+docker build -t python-helloworld .
+
+# build an image using the Dockerfile from the `lesson1/python-app` directory
+docker build -t python-helloworld lesson1/python-app
+
+# execute an image
+# OPTIONS - optional;  define extra configuration
+# IMAGE -  required; provides the name of the image to be executed
+# COMMAND and ARGS - optional; instruct the container to run specific commands when it starts 
+docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+# Where OPTIONS can be:
+-d, --detach - run in the background 
+-p, --publish - expose container port to host
+-it - start an interactive shell
+
+# Find all valid options for this command 
+docker run --help
+
+# run the `python-helloworld` image, in detached mode and expose it on port `5111`
+docker run -d -p 5111:5000 python-helloworld
+
+docker logs 95173091eb5e
+
+## Example output from a Flask application
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
