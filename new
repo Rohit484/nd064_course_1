@@ -1,0 +1,5 @@
+FROM -  to set the base image
+RUN - to execute a command
+COPY & ADD  - to copy files from host to the container
+CMD - to set the default command to execute when the container starts
+EXPOSE - to expose an application port 
