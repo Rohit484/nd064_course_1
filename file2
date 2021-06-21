@@ -1,0 +1,20 @@
+FROM golang:alpine
+
+WORKDIR /go/src/app
+
+ADD . .
+
+RUN go build  -o helloworld
+
+EXPOSE 6111
+
+CMD ["./helloworld"]
+
+# build the image
+docker build -t go-helloworld .
+
+# tag the image
+docker tag go-helloworld pixelpotato/go-helloworld:v1.0.0
+
+# push the image
+docker push pixelpotato/go-helloworld:v1.0.0
