@@ -1,0 +1,40 @@
+apiVersion: v1
+# define the cluster metadata 
+clusters:
+- cluster:
+    certificate-authority-data: {{ CA }}
+    server: https://127.0.0.1:63668
+  name: udacity-cluster
+# define the user details 
+users:
+# `udacity-user` user authenticates using client and key certificates 
+- name: udacity-user
+  user:
+    client-certificate-data: {{ CERT }}
+    client-key-data: {{ KEY }}
+# `green-user` user authenticates using a token
+- name: green-user
+  user:
+    token: {{ TOKEN }}
+# define the contexts 
+contexts:
+- context:
+    cluster: udacity-cluster
+    user: udacity-user
+  name: udacity-context
+# set the current context
+current-context: udacity-context
+
+
+
+
+# Inspect  the endpoints for the cluster and installed add-ons 
+kubectl cluster-info
+
+# List all the nodes in the cluster. 
+# To get a more detailed view of the nodes, the `-o wide` flag can be passed
+kubectl get nodes [-o wide] 
+
+# Describe a cluster node.
+# Typical configuration: node IP, capacity (CPU and memory), a list of running pods on the node, podCIDR, etc.
+kubectl describe node {{ NODE NAME }}
