@@ -1,0 +1,73 @@
+# create a Deployment resource
+# NAME - required; set the name of the deployment
+# IMAGE - required;  specify the Docker image to be executed
+# FLAGS - optional; provide extra configuration parameters for the resource
+# COMMAND and args - optional; instruct the container to run specific commands when it starts 
+kubectl create deploy NAME --image=image [FLAGS] -- [COMMAND] [args]
+
+# Some of the widely used FLAGS are:
+-r, --replicas - set the number of replicas
+-n, --namespace - set the namespace to run
+--port - expose the container port
+
+
+
+# create a go-helloworld Deployment in namespace `test`
+kubectl create deploy go-helloworld --image=pixelpotato/go-helloworld:v1.0.0 -n test
+
+
+# create a headless pod
+# NAME - required; set the name of the pod
+# IMAGE - required;  specify the Docker image to be executed
+# FLAGS - optional; provide extra configuration parameters for the resource
+# COMMAND and args - optional; instruct the container to run specific commands when it starts 
+kubectl run NAME --image=image [FLAGS] -- [COMMAND] [args...]
+
+# Some of the widely used FLAGS are:
+--restart - set the restart policy. Options [Always, OnFailure, Never]
+--dry-run - dry run the command. Options [none, client, server]
+-it - open an interactive shell to the container
+
+
+# example: create a busybox pod, with an interactive shell and a restart policy set to Never 
+kubectl run -it busybox-test --image=busybox --restart=Never
+
+
+# Application version: v1.0.0
+# port exposed: 6111
+package main
+
+import (
+    "fmt"
+    "net/http"
+)
+
+func helloWorld(w http.ResponseWriter, r *http.Request){
+    fmt.Fprintf(w, "Hello World")
+}
+
+func main() {
+    http.HandleFunc("/", helloWorld)
+    http.ListenAndServe(":6111", nil)
+}
+
+
+
+
+# Application version: v2.0.0
+# port exposed: 6112
+package main
+
+import (
+    "fmt"
+    "net/http"
+)
+
+func helloWorld(w http.ResponseWriter, r *http.Request){
+    fmt.Fprintf(w, "Hello World")
+}
+
+func main() {
+    http.HandleFunc("/", helloWorld)
+    http.ListenAndServe(":6112", nil)
+}
