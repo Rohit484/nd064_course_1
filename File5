@@ -1,0 +1,16 @@
+# expose a Deployment through a Service resource 
+# NAME - required; set the name of the deployment to be exposed
+# --port - required; specify the port that the service should serve on
+# --target-port - optional; specify the port on the container that the service should direct traffic to
+# FLAGS - optional; provide extra configuration parameters for the service
+kubectl expose deploy NAME --port=port [--target-port=port] [FLAGS]
+
+# Some of the widely used FLAGS are:
+--protocol - set the network protocol. Options [TCP|UDP|SCTP]
+--type - set the type of service. Options [ClusterIP, NodePort, LoadBalancer]
+
+
+
+# expose the `go-helloworld` deployment on port 8111
+# note: the application is serving requests on port 6112
+kubectl expose deploy go-helloworld --port=8111 --target-port=6112
