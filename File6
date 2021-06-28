@@ -1,0 +1,38 @@
+# create a Configmap
+# NAME - required; set the name of the configmap resource
+# FLAGS - optional; define  extra configuration parameters for the configmap
+kubectl create configmap NAME [FLAGS]
+
+# Some of the widely used FLAGS are:
+--from-file - set path to file with key-value pairs 
+--from-literal - set key-value pair from command-line 
+
+
+# create a Configmap to store the color value
+kubectl create configmap test-cm --from-literal=color=yellow
+
+
+
+# create a Secret
+# NAME - required; set the name of the secret resource
+# FLAGS - optional; define  extra configuration parameters for the secret
+kubectl create secret generic NAME [FLAGS]
+
+# Some of the widely used FLAGS are:
+--from-file - set path to file with the sensitive key-value pairs 
+--from-literal - set key-value pair from command-line 
+
+
+# create a Secret to store the secret color value
+kubectl create secret generic test-secret --from-literal=color=blue
+
+# create a Namespace
+# NAME - required; set the name of the Namespace
+kubectl create ns NAME
+
+# create a `test-udacity` Namespace
+kubectl create ns test-udacity
+
+# get all the pods in the `test-udacity` Namespace
+kubectl get po -n test-udacity
+
