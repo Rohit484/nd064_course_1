@@ -1,0 +1,55 @@
+## The chart API version
+apiVersion: v1
+## The name of the chart. 
+## In this case,  the chart name is`python-helloworld `.
+name: python-helloworld 
+## A single-sentence description of this project
+description: Install Python HelloWorld
+## A list of keywords about this project to quickly identify the chart's capabilities.
+keywords:
+- python
+- helloworld 
+## The chart version, here set to `3.7.0`
+version: 3.7.0
+## List of maintainers, their names, and method of contact
+maintainers:
+- name: kgamanji 
+  email: kgamanji@xyz.com
+  
+  ## provide the name of the namespace
+namespace:
+  name: test
+
+## define the image to execute with the Deployment 
+image:
+  repository:
+     pixelpotato/python-helloworld 
+  tag: v1.0.0
+
+## set the number of replicas for an application 
+replicaCount: 3
+
+## override the name of the namespace
+namespace:
+  name: prod
+  
+  
+  apiVersion: v1
+kind: Namespace
+metadata:
+  name: prod
+  
+  [...]
+  source:
+    ## change the source of manifests to a Helm chart
+    helm:
+      ## define the input values file
+      valueFiles:
+      - values.yaml
+    ## set the path to the folder where the Helm chart is stored
+    path: solutions/helm/python-helloworld
+    ## set the base repository that contains the Helm chart
+    repoURL: https://github.com/udacity/nd064_course_1 
+    targetRevision: HEAD
+    
+    
